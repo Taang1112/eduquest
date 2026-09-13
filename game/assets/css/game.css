@@ -1,0 +1,173 @@
+/* ==================================================
+   EDUQUEST - GAME CANVAS, HUD & MAP LEGEND STYLES (PHASE 4)
+   ================================================== */
+
+.game-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #0b0f19;
+}
+
+/* Top Game HUD Bar */
+.game-hud-navbar {
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(99, 102, 241, 0.25);
+    padding: 0.65rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 50;
+}
+
+.hud-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.hud-user-tag {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+}
+
+.hud-stats-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.hud-stat-pill {
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.hud-stat-pill.level {
+    border-color: rgba(245, 158, 11, 0.4);
+    color: #fbbf24;
+}
+
+.hud-stat-pill.xp {
+    border-color: rgba(99, 102, 241, 0.4);
+    color: #818cf8;
+}
+
+.hud-stat-pill.score {
+    border-color: rgba(16, 185, 129, 0.4);
+    color: #34d399;
+}
+
+/* Canvas Container & Controls Bar */
+.game-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0.5rem;
+    background: radial-gradient(circle at center, rgba(15, 23, 42, 0.8) 0%, #0b0f19 100%);
+}
+
+/* Active Quest HUD Overlay Widget */
+.hud-active-quest-box {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    border-radius: 12px;
+    padding: 0.6rem 1rem;
+    color: #ffffff;
+    font-size: 0.82rem;
+    z-index: 10;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    max-width: 260px;
+    backdrop-filter: blur(6px);
+}
+
+.hud-quest-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #818cf8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.2rem;
+}
+
+.hud-quest-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #f1f5f9;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hud-quest-status {
+    margin-top: 0.25rem;
+    font-size: 0.8rem;
+    color: #38bdf8;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+#gameCanvas {
+    background: #0f172a;
+    border: 2px solid rgba(99, 102, 241, 0.35);
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.25);
+    max-width: 100%;
+    max-height: calc(100vh - 120px);
+    display: block;
+}
+
+/* Control Hints & Map Legend Bar */
+.game-controls-bar {
+    margin-top: 0.5rem;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.4rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+}
+
+.hud-map-legend {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    border-left: 1px solid rgba(255,255,255,0.15);
+    padding-left: 1rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.78rem;
+    color: #cbd5e1;
+}
+
+.key-badge {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    color: #ffffff;
+    font-family: monospace;
+    font-weight: 700;
+}
