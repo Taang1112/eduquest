@@ -387,11 +387,116 @@ window.SchoolMap = {
                 ctx.fillStyle = '#78350f';
                 ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
             } else if (obs.type === 'pc_row') {
+                // Computer Lab Desk Surface
                 ctx.fillStyle = '#1e293b';
                 ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+                ctx.strokeStyle = '#334155';
+                ctx.lineWidth = 1.5;
+                ctx.strokeRect(obs.x, obs.y, obs.width, obs.height);
+
+                // Render 6 PC Workstations per Desk Row
+                let pcCount = 6;
+                let spacing = obs.width / pcCount;
+
+                for (let i = 0; i < pcCount; i++) {
+                    let pcX = obs.x + (i + 0.5) * spacing;
+                    let pcY = obs.y + 14;
+
+                    // Workstation Slot Divider Line
+                    if (i > 0) {
+                        ctx.strokeStyle = 'rgba(51, 65, 85, 0.4)';
+                        ctx.beginPath();
+                        ctx.moveTo(obs.x + i * spacing, obs.y);
+                        ctx.lineTo(obs.x + i * spacing, obs.y + obs.height);
+                        ctx.stroke();
+                    }
+
+                    // CPU Tower (Under/Beside Desk)
+                    ctx.fillStyle = '#0f172a';
+                    ctx.fillRect(pcX - 28, obs.y + 6, 9, 24);
+                    ctx.fillStyle = '#38bdf8';
+                    ctx.fillRect(pcX - 25, obs.y + 10, 3, 3); // Power Button
+                    ctx.fillStyle = '#475569';
+                    ctx.fillRect(pcX - 26, obs.y + 16, 5, 2); // Disc Drive Slot
+
+                    // Monitor Base & Stand
+                    ctx.fillStyle = '#64748b';
+                    ctx.fillRect(pcX - 8, pcY + 10, 16, 3);
+                    ctx.fillRect(pcX - 2, pcY + 6, 4, 5);
+
+                    // Monitor Outer Frame
+                    ctx.fillStyle = '#0f172a';
+                    ctx.fillRect(pcX - 16, pcY - 9, 32, 17);
+                    ctx.strokeStyle = '#475569';
+                    ctx.lineWidth = 1;
+                    ctx.strokeRect(pcX - 16, pcY - 9, 32, 17);
+
+                    // Glowing Monitor Screen (Active IDE / Tech Display)
+                    ctx.fillStyle = '#0284c7';
+                    ctx.fillRect(pcX - 14, pcY - 7, 28, 13);
+
+                    // Screen UI lines (Simulated Code / Data)
+                    ctx.fillStyle = '#38bdf8';
+                    ctx.fillRect(pcX - 11, pcY - 5, 14, 2);
+                    ctx.fillStyle = '#7dd3fc';
+                    ctx.fillRect(pcX - 11, pcY - 1, 18, 2);
+                    ctx.fillStyle = '#4ade80';
+                    ctx.fillRect(pcX - 11, pcY + 3, 10, 2);
+
+                    // Monitor Power LED
+                    ctx.fillStyle = '#22c55e';
+                    ctx.fillRect(pcX + 11, pcY + 6, 2, 2);
+
+                    // Keyboard
+                    ctx.fillStyle = '#334155';
+                    ctx.fillRect(pcX - 13, pcY + 16, 22, 6);
+                    ctx.fillStyle = '#94a3b8';
+                    ctx.fillRect(pcX - 11, pcY + 17, 18, 4);
+
+                    // Mouse
+                    ctx.fillStyle = '#cbd5e1';
+                    ctx.fillRect(pcX + 12, pcY + 16, 5, 6);
+
+                    // Computer Stool / Chair Behind Desk
+                    let stoolY = (obs.y < 1100) ? obs.y + obs.height + 10 : obs.y - 10;
+                    ctx.fillStyle = '#1e3a8a';
+                    ctx.beginPath();
+                    ctx.arc(pcX, stoolY, 7, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.strokeStyle = '#38bdf8';
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
             } else if (obs.type === 'server_rack') {
+                // Main Server Cabinet Frame
                 ctx.fillStyle = '#0f172a';
                 ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+                ctx.strokeStyle = '#38bdf8';
+                ctx.lineWidth = 1.5;
+                ctx.strokeRect(obs.x, obs.y, obs.width, obs.height);
+
+                // Draw Server Blade Units & LED Activity Lights
+                for (let sy = obs.y + 6; sy < obs.y + obs.height - 10; sy += 24) {
+                    ctx.fillStyle = '#1e293b';
+                    ctx.fillRect(obs.x + 4, sy, obs.width - 8, 18);
+                    ctx.strokeStyle = '#334155';
+                    ctx.lineWidth = 1;
+                    ctx.strokeRect(obs.x + 4, sy, obs.width - 8, 18);
+
+                    // Ventilation grills
+                    ctx.fillStyle = '#475569';
+                    ctx.fillRect(obs.x + 8, sy + 4, 16, 10);
+
+                    // Blinking Server Status LEDs
+                    ctx.fillStyle = '#22c55e'; ctx.fillRect(obs.x + 28, sy + 5, 3, 3);
+                    ctx.fillStyle = '#38bdf8'; ctx.fillRect(obs.x + 33, sy + 5, 3, 3);
+                    ctx.fillStyle = '#f59e0b'; ctx.fillRect(obs.x + 28, sy + 10, 3, 3);
+                }
+
+                ctx.font = '700 8px Outfit, sans-serif';
+                ctx.fillStyle = '#38bdf8';
+                ctx.textAlign = 'center';
+                ctx.fillText('SERVER', obs.x + obs.width / 2, obs.y + obs.height - 4);
             } else if (obs.type === 'tree') {
                 let centerX = obs.x + obs.width / 2;
                 let centerY = obs.y + obs.height / 2;
