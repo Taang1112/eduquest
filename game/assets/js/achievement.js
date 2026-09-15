@@ -11,8 +11,8 @@ window.AchievementSystem = {
 
     bindEvents() {
         document.addEventListener('keydown', (e) => {
-            // Hotkey 'A' or 'a' for Achievement panel
-            if (e.key === 'a' || e.key === 'A') {
+            // Hotkey 'H' or 'h' for Achievement panel
+            if (e.key === 'h' || e.key === 'H') {
                 if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
                     this.toggleModal();
                 }

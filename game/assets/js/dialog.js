@@ -92,7 +92,7 @@ window.DialogSystem = {
                     "Klaim reward-mu sekarang!"
                 ];
             } else {
-                let hint = (this.currentNpc.questId === 1) ? `Visited ${QuestSystem.visitedAreas.size}/4 areas.` : '';
+                let hint = (this.currentNpc.questId === 1) ? `Visited ${QuestSystem.getQuest1VisitedCount()}/4 areas.` : '';
                 return [
                     `Quest '${this.currentQuest ? this.currentQuest.title : ''}' masih berlangsung.`,
                     `${this.currentQuest ? this.currentQuest.description : ''} ${hint}`

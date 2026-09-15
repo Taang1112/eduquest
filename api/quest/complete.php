@@ -84,6 +84,39 @@ try {
             ]);
             exit;
         }
+    } else {
+        // 2c. Server-Side Validation for Non-Quiz Quest Objectives
+        $rawVisited = $rawInput['visited_areas'] ?? $_POST['visited_areas'] ?? [];
+        if (is_string($rawVisited)) {
+            $rawVisited = json_decode($rawVisited, true) ?? [];
+        }
+        if (!is_array($rawVisited)) {
+            $rawVisited = [];
+        }
+
+        if ($questId === 1) {
+            $validAreas = ['courtyard', 'classroom', 'ruang_guru', 'computer_lab', 'library', 'cafeteria', 'uks', 'aula', 'lapangan'];
+            $q1Visited = array_values(array_unique(array_intersect($rawVisited, $validAreas)));
+            $count = count($q1Visited);
+
+            if ($count < 4) {
+                $pdo->rollBack();
+                echo json_encode([
+                    'success' => false,
+                    'message' => "Objective belum selesai! Anda baru menjelajahi {$count}/4 area sekolah."
+                ]);
+                exit;
+            }
+        } elseif ($questId === 8) {
+            if (!in_array('secret_area', $rawVisited)) {
+                $pdo->rollBack();
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Objective belum selesai! Anda belum menemukan Taman Rahasia Alumni.'
+                ]);
+                exit;
+            }
+        }
     }
 
     // 3. Lock and Fetch User Stats

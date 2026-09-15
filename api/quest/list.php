@@ -28,7 +28,7 @@ try {
     }
 
     // 2. Get All Quests
-    $stmtQuests = $pdo->query("SELECT id, title, description, xp_reward, score_reward, requires_quiz FROM quests ORDER BY id ASC");
+    $stmtQuests = $pdo->query("SELECT id, title, description, xp_reward, score_reward, prerequisite_quest_id, type, requires_quiz FROM quests ORDER BY id ASC");
     $quests = $stmtQuests->fetchAll();
 
     // 3. Get User Quest Statuses

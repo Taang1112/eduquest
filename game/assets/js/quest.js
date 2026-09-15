@@ -98,7 +98,10 @@ window.QuestSystem = {
             const res = await fetch('../api/quest/complete.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ quest_id: questId })
+                body: JSON.stringify({
+                    quest_id: questId,
+                    visited_areas: Array.from(this.visitedAreas)
+                })
             });
             const data = await res.json();
 
@@ -139,6 +142,12 @@ window.QuestSystem = {
         }
     },
 
+    getQuest1VisitedCount() {
+        const validQuest1Areas = ['courtyard', 'classroom', 'ruang_guru', 'computer_lab', 'library', 'cafeteria', 'uks', 'aula', 'lapangan'];
+        let q1Visited = Array.from(this.visitedAreas).filter(a => validQuest1Areas.includes(a));
+        return Math.min(4, q1Visited.length);
+    },
+
     // --------------------------------------------------
     // 4. Realtime Area Detection & Quest 1 Progress
     // --------------------------------------------------
@@ -171,13 +180,9 @@ window.QuestSystem = {
 
         // Quest 1 ("Kenali Sekolahmu"): Requires visiting 4 unique key school areas
         if (this.activeQuest && this.activeQuest.id === 1) {
-            const validQuest1Areas = ['courtyard', 'classroom', 'ruang_guru', 'computer_lab', 'library', 'cafeteria', 'uks', 'aula'];
-            let q1Visited = Array.from(this.visitedAreas).filter(a => validQuest1Areas.includes(a));
-            let count = q1Visited.length;
+            let count = this.getQuest1VisitedCount();
 
-            if (count < 4) {
-                // HUD updates automatically
-            } else if (count === 4 && !this.q1ToastShown) {
+            if (count === 4 && !this.q1ToastShown) {
                 this.q1ToastShown = true;
                 this.showToast('✓ Objective Selesai! Bicara dengan Bu Sari untuk klaim reward.', 'success');
             }
@@ -188,9 +193,7 @@ window.QuestSystem = {
     // Check if Quest objective is met
     isObjectiveMet(questId) {
         if (questId === 1) {
-            const validAreas = ['courtyard', 'classroom', 'ruang_guru', 'computer_lab', 'library', 'cafeteria', 'uks', 'aula'];
-            let count = Array.from(this.visitedAreas).filter(a => validAreas.includes(a)).length;
-            return count >= 4;
+            return this.getQuest1VisitedCount() >= 4;
         }
         if (questId === 8) return this.visitedAreas.has('secret_area');
         return true;
@@ -221,7 +224,7 @@ window.QuestSystem = {
             if (this.activeQuest) {
                 let statusText = '';
                 if (this.activeQuest.id === 1) {
-                    let count = Math.min(4, this.visitedAreas.size);
+                    let count = this.getQuest1VisitedCount();
                     statusText = count >= 4 ? `✓ Explorer: 4/4 Area (Klaim ke Bu Sari)` : `📍 Explorer: ${count}/4 Area`;
                 } else {
                     statusText = `✏️ Akses Kuis di Lokasi Quest`;
@@ -300,12 +303,22 @@ window.QuestSystem = {
             let percent = 0;
 
             if (this.activeQuest.id === 1) {
-                let currentCount = Math.min(4, this.visitedAreas.size);
+                let currentCount = this.getQuest1VisitedCount();
                 progressText = `${currentCount}/4 Area`;
                 percent = (currentCount / 4) * 100;
             } else {
-                progressText = 'Dapat Diklaim!';
-                percent = 100;
+                let isMet = this.isObjectiveMet(this.activeQuest.id);
+                let requiresQuiz = parseInt(this.activeQuest.requires_quiz) === 1;
+                if (requiresQuiz) {
+                    progressText = 'Kuis Diperlukan';
+                    percent = 50;
+                } else if (isMet) {
+                    progressText = 'Dapat Diklaim!';
+                    percent = 100;
+                } else {
+                    progressText = 'Belum Selesai';
+                    percent = 25;
+                }
             }
 
             html += `

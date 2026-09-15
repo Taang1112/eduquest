@@ -74,8 +74,8 @@ try {
             </div>
 
             <div class="hud-buttons-row">
-                <button onclick="AchievementSystem.toggleModal()" class="hud-btn" title="Achievement (Tombol A)">
-                    🏆 Prestasi [A]
+                <button onclick="AchievementSystem.toggleModal()" class="hud-btn" title="Achievement (Tombol H)">
+                    🏆 Prestasi [H]
                 </button>
                 <button onclick="InventorySystem.toggleModal()" class="hud-btn" title="Inventaris (Tombol I)">
                     🎒 Item [I]
@@ -107,7 +107,7 @@ try {
             <span>Gerak: <span class="key-badge">W</span><span class="key-badge">A</span><span class="key-badge">S</span><span class="key-badge">D</span></span>
             <span>Interaksi: <span class="key-badge">E</span></span>
             <span>Quest: <span class="key-badge">Q</span></span>
-            <span>Prestasi: <span class="key-badge">A</span></span>
+            <span>Prestasi: <span class="key-badge">H</span></span>
             <span>Item: <span class="key-badge">I</span></span>
             <span>Profil: <span class="key-badge">P</span></span>
             <div class="hud-map-legend">
