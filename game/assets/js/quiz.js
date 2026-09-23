@@ -174,7 +174,18 @@ window.QuizSystem = {
                 btn.className = 'quiz-choice-btn';
                 btn.type = 'button';
                 btn.setAttribute('data-id', c.id);
-                btn.innerHTML = `<span class="quiz-choice-label">${label}</span> <span>${c.answer_text}</span>`;
+
+                const labelSpan = document.createElement('span');
+                labelSpan.className = 'quiz-choice-label';
+                labelSpan.textContent = label;
+
+                const textSpan = document.createElement('span');
+                textSpan.className = 'quiz-choice-text';
+                textSpan.textContent = c.answer_text ?? '';
+
+                btn.appendChild(labelSpan);
+                btn.appendChild(document.createTextNode(' '));
+                btn.appendChild(textSpan);
 
                 btn.onclick = () => this.selectChoice(c.id, btn);
                 choicesGrid.appendChild(btn);

@@ -208,12 +208,16 @@ window.QuestSystem = {
     // 5. Realtime Unified HUD & Quest Panel Refresh
     // --------------------------------------------------
     updateHUDStats(user) {
-        const levelEl = document.getElementById('hudLevel');
-        const xpEl = document.getElementById('hudXp');
-        const scoreEl = document.getElementById('hudScore');
+        if (window.ProgressionSystem && ProgressionSystem.userData) {
+            ProgressionSystem.userData = { ...ProgressionSystem.userData, ...user };
+            ProgressionSystem.updateHUD();
+            return;
+        }
 
-        if (levelEl) levelEl.textContent = user.level;
-        if (xpEl) xpEl.textContent = user.xp;
+        const levelEl = document.getElementById('hud-level');
+        const scoreEl = document.getElementById('hud-score');
+
+        if (levelEl) levelEl.textContent = `Lvl ${user.level}`;
         if (scoreEl) scoreEl.textContent = user.score;
     },
 

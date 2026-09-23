@@ -160,19 +160,19 @@ try {
     </div>
 
     <!-- Modular Game Engine, Quiz & Progression Scripts -->
-    <script src="assets/js/collision.js"></script>
-    <script src="assets/js/map.js"></script>
-    <script src="assets/js/player.js"></script>
-    <script src="assets/js/camera.js"></script>
-    <script src="assets/js/quest.js"></script>
-    <script src="assets/js/quiz.js"></script>
-    <script src="assets/js/worldObjects.js"></script>
-    <script src="assets/js/npc.js"></script>
-    <script src="assets/js/dialog.js"></script>
-    <script src="assets/js/progression.js"></script>
-    <script src="assets/js/achievement.js"></script>
-    <script src="assets/js/inventory.js"></script>
-    <script src="assets/js/game.js"></script>
+    <script src="assets/js/collision.js?v=<?= filemtime(__DIR__ . '/assets/js/collision.js') ?>"></script>
+    <script src="assets/js/map.js?v=<?= filemtime(__DIR__ . '/assets/js/map.js') ?>"></script>
+    <script src="assets/js/player.js?v=<?= filemtime(__DIR__ . '/assets/js/player.js') ?>"></script>
+    <script src="assets/js/camera.js?v=<?= filemtime(__DIR__ . '/assets/js/camera.js') ?>"></script>
+    <script src="assets/js/quest.js?v=<?= filemtime(__DIR__ . '/assets/js/quest.js') ?>"></script>
+    <script src="assets/js/quiz.js?v=<?= filemtime(__DIR__ . '/assets/js/quiz.js') ?>"></script>
+    <script src="assets/js/worldObjects.js?v=<?= filemtime(__DIR__ . '/assets/js/worldObjects.js') ?>"></script>
+    <script src="assets/js/npc.js?v=<?= filemtime(__DIR__ . '/assets/js/npc.js') ?>"></script>
+    <script src="assets/js/dialog.js?v=<?= filemtime(__DIR__ . '/assets/js/dialog.js') ?>"></script>
+    <script src="assets/js/progression.js?v=<?= filemtime(__DIR__ . '/assets/js/progression.js') ?>"></script>
+    <script src="assets/js/achievement.js?v=<?= filemtime(__DIR__ . '/assets/js/achievement.js') ?>"></script>
+    <script src="assets/js/inventory.js?v=<?= filemtime(__DIR__ . '/assets/js/inventory.js') ?>"></script>
+    <script src="assets/js/game.js?v=<?= filemtime(__DIR__ . '/assets/js/game.js') ?>"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
